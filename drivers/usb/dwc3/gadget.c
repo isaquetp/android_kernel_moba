@@ -1725,6 +1725,11 @@ static int dwc3_gadget_ep_dequeue(struct usb_ep *ep,
 				}
 			}
 			goto out1;
+			dwc3_gadget_move_cancelled_request(req);
+			if (dep->flags & DWC3_EP_TRANSFER_STARTED)
+				goto out0;
+			else
+				goto out1;
 		}
 		dev_err(dwc->dev, "request %pK was not queued to %s\n",
 				request, ep->name);
