@@ -1088,6 +1088,8 @@ static int icnss_driver_event_register_driver(void *data)
 	if (test_bit(SKIP_QMI, &quirks))
 		set_bit(ICNSS_FW_READY, &penv->state);
 
+                icnss_call_driver_uevent(penv, ICNSS_UEVENT_FW_READY, NULL);
+
 	if (test_bit(ICNSS_FW_DOWN, &penv->state)) {
 		icnss_pr_err("FW is in bad state, state: 0x%lx\n",
 			     penv->state);
